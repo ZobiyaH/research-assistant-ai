@@ -1,0 +1,528 @@
+:root {
+  --bg-dark: #020617;
+  --sidebar-bg: #0f172a;
+  --glass-bg: rgba(30, 41, 59, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --accent-blue: #3b82f6;
+  --accent-glow: rgba(59, 130, 246, 0.3);
+  --text-main: #f1f5f9;
+  --text-dim: #94a3b8;
+  --ai-bubble: rgba(30, 41, 59, 0.7);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; }
+
+body, html {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-dark);
+  font-family: 'Inter', sans-serif;
+  color: var(--text-main);
+}
+
+/* 2. Layout Structure */
+.dashboard-layout {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  background: radial-gradient(at top right, #1e293b, #020617);
+}
+
+/* 3. Sidebar Styling */
+.sidebar {
+  width: 280px;
+  min-width: 280px;
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  z-index: 10;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.sidebar-header h3 {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-dim);
+}
+
+.new-chat-btn {
+  background: var(--accent-blue);
+  border: none;
+  color: white;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px var(--accent-glow);
+  width: 50%;
+}
+
+.new-chat-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 25px var(--accent-glow);
+  filter: brightness(1.1);
+}
+
+/* 4. History Items */
+.history-list {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--text-dim);
+}
+
+.history-item:hover, .history-item.active {
+  background: var(--glass-bg);
+  border-color: var(--glass-border);
+  color: white;
+  transform: translateX(4px);
+}
+
+.history-text {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.85rem;
+  overflow: hidden;
+}
+
+.history-text .text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.history-actions {
+  display: none;
+  gap: 8px;
+}
+
+.history-item:hover .history-actions {
+  display: flex;
+  animation: fadeIn 0.2s ease;
+}
+
+.history-actions button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  opacity: 0.5;
+  transition: var(--transition);
+}
+
+.history-actions button:hover {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* Main Content Fixes */
+/* 5. Main Research Area */
+.main-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  position: relative;
+}
+
+.glass-card {
+  width: 100%;
+  max-width: 1000px;
+  height: 90vh;
+  background: var(--glass-bg);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid var(--glass-border);
+  border-radius: 28px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+}
+
+/* Enhanced Title Logic */
+.glass-header {
+  padding: 24px;
+  border-bottom: 1px solid var(--glass-border);
+  text-align: center;
+}
+
+.glass-header h1 {
+  font-size: 1.8rem;
+  margin: 0;
+  font-weight: 800;
+  background: linear-gradient(
+    to right, 
+    #fff 20%, 
+    var(--accent-blue) 50%, 
+    #fff 80%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 2 linear infinite;
+}
+
+@keyframes shine {
+  to { background-position: 200% center; }
+}
+
+.badge {
+  display: inline-block;
+  background: rgba(59, 130, 246, 0.1);
+  color: #60a5fa;
+  padding: 5px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  margin-top: 8px;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+
+
+/* Upload UI */
+.upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.drop-zone {
+  width: 100%;
+  max-width: 500px;
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  padding: 60px 20px;
+  border-radius: 20px;
+  text-align: center;
+  color: var(--text-dim);
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.primary-action-btn {
+  background: var(--accent-blue);
+  color: white;
+  border: none;
+  padding: 14px 40px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Chat Layout Fixes */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* 6. Chat & Viewport */
+.view-port {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.chat-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.message-wrapper {
+  display: flex;
+  width: 100%;
+  animation: messageSlide 0.3s ease-out;
+}
+
+.message-wrapper.user { justify-content: flex-end; }
+.message-wrapper.ai { justify-content: flex-start; }
+
+.message-bubble {
+  max-width: 82%;
+  padding: 16px 22px;
+  border-radius: 20px;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  position: relative;
+}
+
+.user .message-bubble {
+  background: var(--accent-blue);
+  color: white;
+  border-bottom-right-radius: 4px;
+  box-shadow: 0 10px 20px var(--accent-glow);
+}
+
+.ai .message-bubble {
+  background: var(--ai-bubble);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  border-bottom-left-radius: 4px;
+}
+
+.chat-input-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 15px;
+  border-radius: 15px;
+  margin-top: 15px;
+}
+
+.chat-input-row input[type="text"] {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: white;
+  outline: none;
+  font-size: 1rem;
+}
+
+.attachment-btn {
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding-right: 10px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.send-btn {
+  background: var(--accent-blue);
+  border: none;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+
+/* 8. Input Area */
+.chat-input-row {
+  margin: 0 30px 30px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #1e293b;
+  padding: 12px 20px;
+  border-radius: 18px;
+  border: 1px solid var(--glass-border);
+  transition: var(--transition);
+}
+
+.chat-input-row:focus-within {
+  border-color: var(--accent-blue);
+  background: #243147;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
+}
+
+.chat-input-row input[type="text"] {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: white;
+  outline: none;
+  font-size: 1rem;
+}
+
+.send-btn {
+  background: var(--accent-blue);
+  border: none;
+  color: white;
+  padding: 10px 22px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: var(--transition);
+}
+
+.send-btn:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+
+/* Spinner */
+.loader-container { text-align: center; margin: auto; }
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255,255,255,0.1);
+  border-left-color: var(--accent-blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 15px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Styling headers inside AI bubbles */
+.message.ai h3 {
+  font-size: 0.9rem;
+  color: #60a5fa; /* Light blue color for the Sources header */
+  margin-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Ensure the scrollbar in the chat is slim and professional */
+.chat-scroll-area::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-scroll-area::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+/* 9. Upload UI */
+.drop-zone {
+  width: 100%;
+  max-width: 500px;
+  border: 2px dashed var(--glass-border);
+  padding: 60px 20px;
+  border-radius: 24px;
+  text-align: center;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.drop-zone:hover {
+  border-color: var(--accent-blue);
+  background: rgba(59, 130, 246, 0.05);
+  color: white;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+@keyframes messageSlide {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+
+.selected-files-list {
+  margin: 15px 0;
+  text-align: left;
+  max-height: 100px;
+  overflow-y: auto;
+  font-size: 0.85rem;
+  color: var(--accent-blue);
+  list-style: none;
+  padding: 0;
+}
+
+.selected-files-list li {
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  margin-bottom: 4px;
+}
+
+.file-preview-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 20px 0;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 15px;
+  animation: fadeIn 0.3s ease;
+}
+
+.file-preview-container h4 {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.selected-files-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.file-item-pill {
+  display: flex;
+  align-items: center;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  transition: var(--transition);
+}
+
+.file-item-pill:hover {
+  background: rgba(59, 130, 246, 0.15);
+  transform: translateX(5px);
+}
+
+.file-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0 10px;
+}
+
+.remove-file-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0 5px;
+}
+
+.remove-file-btn:hover {
+  color: #ef4444;
+}
